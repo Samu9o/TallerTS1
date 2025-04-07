@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Series</title>
+    <!-- Incluye Bootstrap para dar estilo a la tabla -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h1>Listado de Series</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Canal</th>
+            <th>Temporadas</th>
+          </tr>
+        </thead>
+        <tbody id="series-table-body">
+          <!-- Aquí se inyectarán las filas generadas por main.ts -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" id="average-seasons" class="font-weight-bold"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <!-- Carga el JavaScript compilado. Asegúrate de compilar con "npm run build" para generar dist/main.js -->
+    <script type="module" src="dist/main.js"></script>
+  </body>
+</html>
