@@ -9,6 +9,10 @@ function renderTable(series) {
     series.forEach(function (serie) {
         var row = document.createElement("tr");
         row.innerHTML = "\n      <td>".concat(serie.id, "</td>\n      <td>").concat(serie.name, "</td>\n      <td>").concat(serie.channel, "</td>\n      <td>").concat(serie.seasons, "</td>\n    ");
+        // Agrega un evento click para mostrar el detalle de la serie
+        row.addEventListener("click", function () {
+            showSeriesDetail(serie);
+        });
         tableBody.appendChild(row);
     });
 }
@@ -22,6 +26,15 @@ function renderAverage(series) {
         return;
     }
     averageElement.innerText = "Promedio de temporadas: ".concat(average.toFixed(2));
+}
+// Función para mostrar el detalle de una serie en la Card de Bootstrap
+function showSeriesDetail(serie) {
+    var detailContainer = document.getElementById("series-detail");
+    if (!detailContainer) {
+        console.error("No se encontró el elemento 'series-detail' en el DOM.");
+        return;
+    }
+    detailContainer.innerHTML = "\n    <div class=\"card\">\n      <img class=\"card-img-top\" src=\"".concat(serie.image, "\" alt=\"").concat(serie.name, "\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\">").concat(serie.name, "</h5>\n        <p class=\"card-text\">").concat(serie.description, "</p>\n        <a href=\"").concat(serie.link, "\" class=\"btn btn-primary\" target=\"_blank\">Ver m\u00E1s</a>\n      </div>\n    </div>\n  ");
 }
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", function () {

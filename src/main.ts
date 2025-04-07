@@ -8,7 +8,7 @@ function renderTable(series: Serie[]): void {
     console.error("No se encontró el elemento 'series-table-body' en el DOM.");
     return;
   }
-  
+
   series.forEach(serie => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -17,6 +17,10 @@ function renderTable(series: Serie[]): void {
       <td>${serie.channel}</td>
       <td>${serie.seasons}</td>
     `;
+    // Agrega un evento click para mostrar el detalle de la serie
+    row.addEventListener("click", () => {
+      showSeriesDetail(serie);
+    });
     tableBody.appendChild(row);
   });
 }
@@ -32,6 +36,26 @@ function renderAverage(series: Serie[]): void {
   }
   averageElement.innerText = `Promedio de temporadas: ${average.toFixed(2)}`;
 }
+
+// Función para mostrar el detalle de una serie en la Card de Bootstrap
+function showSeriesDetail(serie: Serie): void {
+  const detailContainer = document.getElementById("series-detail");
+  if (!detailContainer) {
+    console.error("No se encontró el elemento 'series-detail' en el DOM.");
+    return;
+  }
+  detailContainer.innerHTML = `
+    <div class="card">
+      <img class="card-img-top" src="${serie.image}" alt="${serie.name}">
+      <div class="card-body">
+        <h5 class="card-title">${serie.name}</h5>
+        <p class="card-text">${serie.description}</p>
+        <a href="${serie.link}" class="btn btn-primary" target="_blank">Ver más</a>
+      </div>
+    </div>
+  `;
+}
+
 
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
